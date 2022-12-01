@@ -1,7 +1,8 @@
 class ListNode:
-    def __init__(self, x):
+    def __init__(self, x = 0, n = None):
         self.val = x
-        self.next = None
+        self.next = n
+
 
 def createLL(arr):
     head = ListNode(arr[0])
