@@ -13,10 +13,23 @@ def createLL(arr):
     
     return head
 
-def listify(head):
+def listify(head, listEnd = None):
     a = []
-    while(head):
-        a.append(head.val)
-        head = head.next
+    if listEnd:
+        if head:
+            while(head != listEnd):
+                a.append(head.val)
+                head = head.next
+            a.append(head.val) 
+    else:
+        while(head):
+            a.append(head.val)
+            head = head.next
     
     return a
+
+def index(head, index):
+    curr = head
+    for i in range(index):
+        curr = curr.next
+    return curr
