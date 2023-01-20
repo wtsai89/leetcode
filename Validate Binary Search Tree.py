@@ -1,4 +1,5 @@
 from TreeNode import *
+from typing import *
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -6,23 +7,15 @@ from TreeNode import *
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isValidBST(self, root: TreeNode) -> bool:
-        queue = [(root,-pow(2,31)-1,pow(2,31))]
-        while queue:
-            qsize = len(queue)
-            while qsize:
-                node, lt, gt = queue.pop(0)
-                if lt >= node.val:
-                        return False
-                if gt <= node.val:
-                        return False
-                if node.left:
-                    queue.append((node.left,lt,node.val))
-                if node.right:
-                    queue.append((node.right,node.val,gt))
-                qsize -= 1
-        
-        return True
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        def valid(node, left, right):
+            if not node:
+                return True
+            if node.val <= left or node.val >= right:
+                return False
+            return valid(node.left, left, node.val) and valid(node.right, node.val, right)
+
+        return valid(root, -pow(2,31)-1, pow(2,31))
 
 s = Solution()
 root = createTree([5,4,6,'null','null',3,7])
