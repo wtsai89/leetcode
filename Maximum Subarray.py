@@ -1,14 +1,18 @@
+import sys
+
 from typing import List
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        cSum = 0
-        sol = -pow(10,4)-1
-        
+        ans, s = -sys.maxsize-1, -sys.maxsize-1
         for i in nums:
-            cSum = max(i,cSum+i)
-            sol = max(sol,cSum)
-        
-        return sol
+            if i > s + i:
+                s = i
+            else:
+                s += i
+            if s > ans:
+                ans = s
+
+        return ans
 
 s = Solution()
 print(s.maxSubArray([-2,1,-3,4,-1,2,1,-5,4]))
