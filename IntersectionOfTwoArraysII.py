@@ -3,15 +3,17 @@ from typing import List
 
 class Solution:
     def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        d = Counter(nums1)
-        a = []
-        
-        for i in nums2:
-            if d[i]:
-                a.append(i)
-                d[i] -= 1
-                
-        return a
+        d1 = Counter(nums1)
+        d2 = Counter(nums2)
+
+        ans = []
+        for i in d1:
+            if i in d2:
+                freq = min(d1[i],d2[i])
+                for _ in range(freq):
+                    ans.append(i)
+
+        return ans
 
 n1 = [4,9,5]
 n2 = [9,4,9,8,4]
