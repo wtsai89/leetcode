@@ -1,15 +1,17 @@
 from typing import List
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        cMin = pow(10,4)+1
-        profit = 0
-        for i in prices:
-            if i < cMin:
-                cMin = i
-            elif i - cMin > profit:
-                profit = i - cMin
-                
-        return profit
+        ans = 0
+        buy = pow(10,4)+1
+
+        for sell in prices:
+            if sell < buy:
+                buy = sell
+            else:
+                if sell - buy > ans:
+                    ans = sell - buy
+
+        return ans
 
 s = Solution()
 print(s.maxProfit([7,1,5,3,6,4]))
