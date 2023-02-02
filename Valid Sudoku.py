@@ -1,20 +1,18 @@
 from typing import List
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        rowSet, colSet, sqSet = set(), set(), set()
-        
+        rows, cols, boxes = set(), set(), set()
+
         for i in range(len(board)):
             for j in range(len(board[0])):
-                cell = board[i][j]
-                if cell == ".":
+                val = board[i][j]
+                if val == ".":
                     continue
-                
-                if (i,cell) in rowSet or (j,cell) in colSet or (i//3,j//3,cell) in sqSet:
+                if (i,val) in rows or (j,val) in cols or (i//3,j//3,val) in boxes:
                     return False
-                else:
-                    rowSet.add((i,cell))
-                    colSet.add((j,cell))
-                    sqSet.add((i//3,j//3,cell))
+                rows.add((i,val))
+                cols.add((j,val))
+                boxes.add((i//3,j//3,val))
         
         return True
 
