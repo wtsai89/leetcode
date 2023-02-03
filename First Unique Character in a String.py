@@ -1,10 +1,13 @@
 from collections import Counter
 class Solution:
     def firstUniqChar(self, s: str) -> int:
-        d = Counter(s)
-        for i in d:
-            if d[i] == 1:
-                return s.index(i)
+        d = {}
+        for i in s:
+            d[i] = d.get(i,0) + 1
+        
+        for i in range(len(s)):
+            if d[s[i]] == 1:
+                return i
         return -1
 
 s = Solution()
