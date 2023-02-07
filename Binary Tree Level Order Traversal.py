@@ -1,5 +1,5 @@
 from TreeNode import *
-from typing import List
+from typing import *
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -7,24 +7,25 @@ from typing import List
 #         self.left = left
 #         self.right = right
 class Solution:
-    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         if not root:
             return []
-        queue = [root]
-        a = []
-        while queue:
-            qsize = len(queue)
-            aa = []
+        q = [root]
+        ans = []
+        while q:
+            qsize = len(q)
+            row = []
             while qsize:
-                node = queue.pop(0)
-                aa.append(node.val)
+                node = q.pop(0)
+                row.append(node.val)
                 if node.left:
-                    queue.append(node.left)
+                    q.append(node.left)
                 if node.right:
-                    queue.append(node.right)
+                    q.append(node.right)
                 qsize -= 1
-            a += [aa]
-        return a
+            ans.append(row)
+
+        return ans
 
 s = Solution()
 root = createTree([3,9,20,'null','null',15,7])
