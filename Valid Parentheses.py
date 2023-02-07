@@ -1,19 +1,19 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        valid = {
-                    '(':')',
-                    '[':']',
-                    '{':'}'
-                }
-        q = []
-        
-        for c in s:
-            if c in valid:
-                q.append(valid[c])
-            elif not q or c != q.pop():
-                return False
-        
-        if q:
+        openers = {
+                    '(': ')',
+                    '{': '}',
+                    '[': ']',
+                  }
+
+        stack = []
+        for i in s:
+            if i in openers:
+                stack.append(openers[i])
+            else:
+                if not stack or stack.pop() != i:
+                    return False
+        if stack:
             return False
         return True
 
