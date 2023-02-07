@@ -1,4 +1,5 @@
 from TreeNode import *
+from typing import Optional
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -6,30 +7,30 @@ from TreeNode import *
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isSymmetric(self, root: TreeNode) -> bool:
-        queue = [root.left, root.right]
-        while queue:
-            qsize = len(queue)
-            rQ = []
+    def isSymmetric(self, root: Optional[TreeNode]) -> bool:
+        q = [root.left, root.right]
+
+        while q:
+            qsize = len(q)
+            right = []
             while qsize:
-                lnode = queue.pop(0)
-                qsize -= 1
-                if not qsize:
-                    return False
-                rnode = queue.pop(qsize-1)
-                qsize -= 1
-                
-                if (lnode and not rnode) or (rnode and not lnode):
-                    return False
-                if lnode and rnode:
-                    if lnode.val != rnode.val:
+                lnode = q.pop(0)
+                rnode = q.pop(qsize-2)
+                try:
+                    if not lnode and not rnode:
+                        pass
+                    elif lnode.val == rnode.val:
+                        q.append(lnode.left)
+                        q.append(lnode.right)
+                        right.insert(0,rnode.right)
+                        right.insert(0,rnode.left)
+                    else:
                         return False
-                    queue.append(lnode.left)
-                    queue.append(lnode.right)
-                    rQ.insert(0, rnode.right)
-                    rQ.insert(0, rnode.left)
-            queue += rQ
-            
+                except:
+                    return False
+                qsize -= 2
+            q += right
+
         return True
 
 s = Solution()
