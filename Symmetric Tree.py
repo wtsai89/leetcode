@@ -9,27 +9,23 @@ from typing import Optional
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
         q = [root.left, root.right]
-
         while q:
-            qsize = len(q)
             right = []
-            while qsize:
+            length = len(q)
+            for _ in range(length//2):
+                rnode = q.pop(length-1)
                 lnode = q.pop(0)
-                rnode = q.pop(qsize-2)
-                try:
-                    if not lnode and not rnode:
-                        pass
-                    elif lnode.val == rnode.val:
-                        q.append(lnode.left)
-                        q.append(lnode.right)
-                        right.insert(0,rnode.right)
-                        right.insert(0,rnode.left)
-                    else:
+                length -= 2
+                if lnode and rnode:
+                    if lnode.val != rnode.val:
                         return False
-                except:
+                    q.append(lnode.left)
+                    q.append(lnode.right)
+                    right.append(rnode.right)
+                    right.append(rnode.left)
+                elif lnode or rnode:
                     return False
-                qsize -= 2
-            q += right
+            q += right[::-1]
 
         return True
 
