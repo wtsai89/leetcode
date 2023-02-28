@@ -1,6 +1,6 @@
 from collections import defaultdict
 import string
 
-letters = list(string.ascii_lowercase)
+q = defaultdict(lambda: None)
 
-print(letters)
+print(q[1])
