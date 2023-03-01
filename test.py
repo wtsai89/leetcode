@@ -1,6 +1,6 @@
 from collections import defaultdict
 import string
 
-q = defaultdict(lambda: None)
-
-print(q[1])
+a = [[1,4],[0,1]]
+a.sort()
+print(a)
