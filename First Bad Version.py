@@ -1,24 +1,22 @@
 # The isBadVersion API is already defined for you.
 # def isBadVersion(version: int) -> bool:
 
+def isBadVersion(n):
+    a = [0,0,0,1,1]
+    return a[n-1]
+
 class Solution:
     def firstBadVersion(self, n: int) -> int:
-        a = [0,0,0,1,1]
-        def isBadVersion(n):
-            return a[n-1]
-        first = 1
-        last = n
-        
-        while first != last:
-            mid = (first + last + 1) // 2
+        left, right = 1, n
+        while left < right:
+            mid = (left + right) // 2
             if isBadVersion(mid):
-                if not isBadVersion(mid-1):
+                if mid == 1 or not isBadVersion(mid-1):
                     return mid
-                last = mid-1
+                right = mid-1
             else:
-                first = mid+1
-                
-        return first
+                left = mid+1
+        return left
 
 s = Solution()
 print(s.firstBadVersion(5))
